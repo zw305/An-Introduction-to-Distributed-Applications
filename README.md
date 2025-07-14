@@ -1,3 +1,6 @@
-"# An-Introduction-to-Distributed-Applications" 
-"# An-Introduction-to-Distributed-Applications" 
-"# An-Introduction-to-Distributed-Applications" 
+分布式应用（Distributed Application，简称DApp）是一种运行在分布式计算系统上的应用程序，通常基于区块链技术。其核心特点是去中心化，数据和逻辑分布在多个节点上，而不是依赖单一的中央服务器。以下是分布式应用的主要特征和要点：
+去中心化：DApp运行在点对点（P2P）网络上，如区块链（以太坊、波卡等），没有单一控制点，数据存储在多个节点，增强了抗审查性和容错能力。
+开源：DApp的代码通常是公开的，任何人都可以审查、验证或贡献代码，增加透明度和信任。
+基于区块链：大多数DApp使用区块链技术，通过智能合约（Smart Contracts）实现自动化和可信的逻辑执行。智能合约是运行在区块链上的程序，定义了DApp的规则。
+代币机制：许多DApp使用加密代币来激励参与者、支付交易费用或治理系统。例如，以太坊上的DApp通常需要支付“Gas”费用。
+自治性：DApp通常由社区或去中心化自治组织（DAO）管理，而不是由单一实体控制。
