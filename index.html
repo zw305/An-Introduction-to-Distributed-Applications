@@ -2,10 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDIT</title>
+    <title>Counter DApp</title>
 </head>
 <body>
+    <h1>Counter DApp</h1>
+    <p>Current Count: <span id="count">0</span></p>
+    <button onclick="increment()">Increment</button>
+    <button onclick="decrement()">Decrement</button>
 
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script>
+        // 连接到MetaMask
+        let web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+        let contract;
+        let accounts;
+
+        // 智能合约的ABI（接口描述）和地址（部署后获取）
+        const contractABI = [
+            // 从Counter.sol编译后获取的ABI
+            [
+                {
+                    "inputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "constructor"
+                },
+                {
+                    "inputs": [],
+                    "name": "count",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "decrement",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "getCount",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "increment",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                }
+            ]
+        ];
+        const contractAddress = "YOUR_CONTRACT_ADDRESS"; // 替换为部署后的合约地址
+
+        // 初始化合约
+        async function init() {
+            accounts = await web3.eth.getAccounts();
+            contract = new web3.eth.Contract(contractABI, contractAddress);
+            updateCount();
+        }
+
+        // 更新页面上的计数
+        async function updateCount() {
+            const count = await contract.methods.getCount().call();
+            document.getElementById("count").innerText = count;
+        }
+
+        // 调用increment函数
+        async function increment() {
+            await contract.methods.increment().send({ from: accounts[0] });
+            updateCount();
+        }
+
+        // 调用decrement函数
+        async function decrement() {
+            await contract.methods.decrement().send({ from: accounts[0] });
+            updateCount();
+        }
+
+        // 初始化
+        window.addEventListener("load", init);
+    </script>
 </body>
 </html>
